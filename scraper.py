@@ -24,8 +24,8 @@ table = soup.find('table', attrs={"aria-labelledby":"caption-20181105122501"})
 getApproval Dict
 returns a dictionary of strings of weeks mapped to rating named tuple
 """
-def getApprovalDict():
-    approvalDict = {}
+def getApprovalList():
+    approvalList = []
     
     rows = table.find_all('tr')
     for row in rows:      
@@ -39,7 +39,5 @@ def getApprovalDict():
             """
             data = row.find_all('td')
             weeks_rating = ratings(data[0].string,data[1].string,data[2].string)
-            approvalDict[week.string] = weeks_rating
-    return approvalDict
-
-print(getApprovalDict())
+            approvalList.insert(0,(week.string,weeks_rating))
+    return approvalList
