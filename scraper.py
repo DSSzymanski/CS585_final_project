@@ -58,3 +58,18 @@ def generateRatingDataFile():
     fh = open("data/rating_data.txt", "w")    
     fh.writelines(listOfStrings)
     fh.close()
+    
+def getRatingData():
+    return_list = []
+    fh = open("data/rating_data.txt", "r")
+    getList = fh.readlines()
+    fh.close()
+    #remove newline character
+    getList = [x[:-2] for x in getList]
+    
+    #restructure back into original format
+    for entry in getList:
+        strList = entry.split("\t")
+        return_list.append((strList[0], ratings(approval = strList[1], disapproval = strList[2], no_opinion = strList[3])))
+
+    return return_list    
