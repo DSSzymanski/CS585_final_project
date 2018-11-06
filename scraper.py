@@ -18,7 +18,7 @@ ratings = namedtuple('rating_percents', ['approval', 'disapproval', 'no_opinion'
 #url, beautiful soup object, and the correct table
 page = requests.get("https://news.gallup.com/poll/203198/presidential-approval-ratings-donald-trump.aspx")
 soup = BeautifulSoup(page.content, 'html.parser')
-table = soup.find('table', attrs={"aria-labelledby":"caption-20181015120250"})
+table = soup.find('table', attrs={"aria-labelledby":"caption-20181105122501"})
 
 """
 getApproval Dict
@@ -26,7 +26,7 @@ returns a dictionary of strings of weeks mapped to rating named tuple
 """
 def getApprovalDict():
     approvalDict = {}
-
+    
     rows = table.find_all('tr')
     for row in rows:      
         #find the week from the row header
@@ -41,3 +41,5 @@ def getApprovalDict():
             weeks_rating = ratings(data[0].string,data[1].string,data[2].string)
             approvalDict[week.string] = weeks_rating
     return approvalDict
+
+print(getApprovalDict())
