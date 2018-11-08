@@ -6,14 +6,11 @@ TODO: write method to read tweets from .txt to memory
 import tweepy
 import time
 
-"""
-DO NOT TOUCH ACCESS/CONSUMER KEYS
-"""
-consumer_key = "FXBIEbj0jNXbc6Op99ihUerOP"
-consumer_secret = "tAt6gxc2ysiT4BAxqHJt6Y1is63FIwrXqMgiCYZg8pPdqowtwj"
+consumer_key = ""
+consumer_secret = ""
 
-access_token = "1053044601886572544-eFdXIqu6NMf4fHc9fVKxzGkzzmgpMm"
-access_secret = "lSvCjCcEaJf0Gu3d1Dkm3sEWLMrc4wqG8CL2kjCLmtEnc"
+access_token = ""
+access_secret = ""
 
 """
 ID of first tweet written after 1/20/17 @ 12:00PM which is the official
