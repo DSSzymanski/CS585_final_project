@@ -59,6 +59,7 @@ def generateRatingDataFile():
     fh.writelines(listOfStrings)
     fh.close()
     
+#method for reading data in from file
 def getRatingData():
     return_list = []
     fh = open("data/rating_data.txt", "r")

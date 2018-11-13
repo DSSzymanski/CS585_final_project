@@ -1,8 +1,3 @@
-"""
-TODO: write method to read tweets from .txt to memory
-"""
-
-
 import tweepy
 import time
 
@@ -61,3 +56,17 @@ def getTweets():
             break
     
     fh.close()
+    
+#get tweet data from file
+def getRatingData():
+    return_list = []
+    fh = open("data/tweet_data.txt", "r")
+    getList = fh.readlines()
+    fh.close()
+    
+    #TODO: make more readable    
+    for entry in getList:
+        strList = entry.split("\t")
+        return_list.append([strList[0], strList[1], strList[2]])
+
+    return return_list
