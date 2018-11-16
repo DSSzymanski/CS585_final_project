@@ -37,7 +37,7 @@ def train(args):
     if not os.path.exists(args.output):
         os.makedirs(args.output)
 
-    outfile = open(os.path.join(args.output, "logs.txt"), "w")
+    outfile = open(os.path.join(args.output, "char_tensor_logs.txt"), "w")
     outfile.write("Model's parameters: {}".format(vars(args)))
 
     # Prepare the training and testing data
