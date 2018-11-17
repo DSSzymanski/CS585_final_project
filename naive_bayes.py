@@ -135,20 +135,20 @@ class NaiveBayes:
         according to this NB model.
         """
         total_count = self.class_total_word_counts[label]
-        return self.class_word_counts[label][word]/(total_count)
+        return ((self.class_word_counts[label][word] + 0.00001)/(total_count+ 0.00001 * len(self.vocab)))
 
-    def p_word_given_label_and_alpha(self, word, label, alpha):
-        """
-        Implement me!
+    # def p_word_given_label_and_alpha(self, word, label, alpha):
+    #     """
+    #     Implement me!
 
-        Returns the probability of word given label wrt psuedo counts.
-        alpha - smoothing parameter
-        """
-        count_in_class = self.class_total_word_counts[label]
-        return ((self.class_word_counts[label][word] + alpha)/(count_in_class+ alpha * len(self.vocab)))
+    #     Returns the probability of word given label wrt psuedo counts.
+    #     alpha - smoothing parameter
+    #     """
+    #     count_in_class = self.class_total_word_counts[label]
+    #     return ((self.class_word_counts[label][word] + alpha)/(count_in_class+ alpha * len(self.vocab)))
         
 
-    def log_likelihood(self, bow, label, alpha):
+    def log_likelihood(self, bow, label):
         """
         Implement me!
 
@@ -160,7 +160,8 @@ class NaiveBayes:
         total = 0
         count = 0
         for word in bow:
-            total += math.log(self.p_word_given_label_and_alpha(word, label, alpha), 2)
+            if self.p_word_given_label(word, label) != 0:
+                total += math.log(self.p_word_given_label(word, label), 2)
         return total
 
     def log_prior(self, label):
@@ -169,18 +170,18 @@ class NaiveBayes:
 
         Returns the log prior of a document having the class 'label'.
         """
-        return math.log(self.class_total_doc_counts[label]/(self.class_total_doc_counts[POS_LABEL] + self.class_total_doc_counts[NEG_LABEL]), 2)
+        return math.log(self.class_total_doc_counts[label]/(self.class_total_doc_counts[POS_LABEL] + self.class_total_doc_counts[NEG_LABEL]+ self.class_total_doc_counts[NEUT_LABEL]), 2)
         
-    def unnormalized_log_posterior(self, bow, label, alpha):
+    def unnormalized_log_posterior(self, bow, label):
         """
         Implement me!
 
         Computes the unnormalized log posterior (of doc being of class 'label').
         bow - a bag of words (i.e., a tokenized document)
         """
-        return (self.log_prior(label) + self.log_likelihood(bow, label, alpha))
+        return (self.log_prior(label) + self.log_likelihood(bow, label))
 
-    def classify(self, bow, alpha):
+    def classify(self, bow):
         """
         Implement me!
 
@@ -189,10 +190,9 @@ class NaiveBayes:
         (depending on which resulted in the higher unnormalized log posterior)
         bow - a bag of words (i.e., a tokenized document)
         """
-        pos = self.unnormalized_log_posterior(bow, POS_LABEL, alpha)
-        neg = self.unnormalized_log_posterior(bow, NEG_LABEL, alpha)
-        neut = self.unnormalized_log_posterior(bow, NEUT_LABEL, alpha)
-        print(pos, neg, neut)
+        pos = self.unnormalized_log_posterior(bow, POS_LABEL)
+        neg = self.unnormalized_log_posterior(bow, NEG_LABEL)
+        neut = self.unnormalized_log_posterior(bow, NEUT_LABEL)
         
         if pos > neg:
             if pos > neut:
@@ -205,16 +205,54 @@ class NaiveBayes:
             else:
                 return NEUT_LABEL
 
-    def likelihood_ratio(self, word, alpha):
+    def likelihood_ratio(self, word):
         """
         Implement me!
 
         Returns the ratio of P(word|pos) to P(word|neg).
         """
-        return (self.p_word_given_label_and_alpha(word, POS_LABEL, alpha)/self.p_word_given_label_and_alpha(word, NEG_LABEL, alpha))
+        return (self.p_word_given_label(word, POS_LABEL)/self.p_word_given_label(word, NEG_LABEL))/self.p_word_given_label(word, NEUT_LABEL)
+
+    def evaluate_classifier_accuracy(self):
+        """
+        DO NOT MODIFY THIS FUNCTION
+
+        alpha - pseudocount parameter.
+        This function should go through the test data, classify each instance and
+        compute the accuracy of the classifier (the fraction of classifications
+        the classifier gets right.
+        """
+        correct = 0.0
+        total = 0.0
+
+        with open("tweets2.txt") as tsv:
+            for tweet in csv.reader(tsv, dialect="excel-tab"):
+                self.tokenize_and_update_model(tweet[2], tweet[1])
+                content = tweet[2]
+                bow = self.tokenize_doc(content)
+                label = tweet[1]
+                if self.classify(bow) == label:
+                    correct += 1.0
+                total += 1.0
+        return 100 * correct / total
 
 if __name__ == "__main__":
     nb = NaiveBayes("tweets1.txt", tokenizer=tokenize_doc)
     nb.train_model()
-    print(nb.classify("joy", 0.0001))
+    print(nb.evaluate_classifier_accuracy())
+
+    neg = 0
+    pos = 0
+    neut = 0
+    lines = [line.rstrip('\n') for line in open('trump_tweets.txt')]
+    for line in lines:
+        label = nb.classify(line)
+        if label == "negative":
+            neg += 1
+        elif label == "positive":
+            pos += 1
+        else:
+            neut += 1
+    print(pos, neg, neut)
+    # print(nb.classify("Isn’t it ironic that large Caravans of people are marching to our border wanting U.S.A. asylum because they are fearful of being in their country - yet they are proudly waving"))
 
