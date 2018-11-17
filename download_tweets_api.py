@@ -3,6 +3,7 @@ import os
 import time
 import datetime
 import argparse
+import config
 
 from twitter import *
 
@@ -13,8 +14,8 @@ parser.add_argument('--output', dest='output', default=None, type=argparse.FileT
 
 args = parser.parse_args()
 
-CONSUMER_KEY='rdEDofcdGZKAnuHKOBDrF4YuA'
-CONSUMER_SECRET='2PsV1oY63QfwpdaRA6jHT0IjyWxxRLrTP4urgoNNjw57dPCvVc'
+CONSUMER_KEY=config.consumer_key
+CONSUMER_SECRET=config.consumer_secret
 
 MY_TWITTER_CREDS = os.path.expanduser('~/.my_app_credentials')
 if not os.path.exists(MY_TWITTER_CREDS):
