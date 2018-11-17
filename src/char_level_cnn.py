@@ -21,7 +21,7 @@ class CharLevelConvNet(nn.Module):
         self.fc1 = nn.Sequential(nn.Linear(dimension, n_fc_neurons), nn.ReLU(), nn.Dropout(0.5))
         self.fc2 = nn.Sequential(nn.Linear(n_fc_neurons, n_fc_neurons), nn.ReLU(), nn.Dropout(0.5))
         self.fc3 = nn.Linear(n_fc_neurons, n_classes)
-        self.log_softmax = nn.LogSoftmax(dim=1)
+        # self.log_softmax = nn.LogSoftmax(dim=1)
 
     def forward(self, input):
         output = self.conv1(input)
@@ -35,5 +35,5 @@ class CharLevelConvNet(nn.Module):
         output = self.fc1(output)
         output = self.fc2(output)
         output = self.fc3(output)
-        output = self.log_softmax(output)
+        # output = self.log_softmax(output)
         return output

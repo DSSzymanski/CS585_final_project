@@ -5,6 +5,7 @@ import os
 import argparse
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from src.utils import *
 from src.dataset import *
@@ -25,7 +26,7 @@ def get_args():
     parser.add_argument("-l", "--lr", type=float, default=0.001)
     parser.add_argument("-c", "--n_conv_filters", type=int, default=256)
     parser.add_argument("-f", "--n_fc_neurons", type=int, default=1024)
-    parser.add_argument("-i", "--input", type=str, default="data", help="path to input folder")
+    parser.add_argument("-i", "--input", type=str, default="data/SemEval", help="path to input folder")
     parser.add_argument("-o", "--output", type=str, default="output", help="path to output folder")
     args = parser.parse_args()
 
@@ -40,9 +41,9 @@ def train(args):
     outfile.write("Model's parameters: {}".format(vars(args)))
 
     # Prepare the training and testing data
-    training_set = CharDataset(os.path.join(args.input, "train.csv"),
+    training_set = CharDataset(os.path.join(args.input, "train.txt"),
                                os.path.join(args.input, "classes.txt"), args.alphabet, args.max_length)
-    test_set = CharDataset(os.path.join(args.input, "test.csv"),
+    test_set = CharDataset(os.path.join(args.input, "test.txt"),
                            os.path.join(args.input, "classes.txt"), args.alphabet, args.max_length)
     training_generator = DataLoader(training_set, batch_size=args.batch_size, shuffle=True)
     test_generator = DataLoader(test_set, batch_size=args.batch_size, shuffle=False)
@@ -53,7 +54,8 @@ def train(args):
                              n_fc_neurons=args.n_fc_neurons)
     model = model.to(device)
 
-    criterion = nn.NLLLoss()
+    # criterion = nn.NLLLoss()
+    criterion = nn.CrossEntropyLoss()
     if args.optimizer == "adam":
         optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
     elif args.optimizer == "sgd":
@@ -90,6 +92,7 @@ def train(args):
             t_data, _ = batch               # tensor format
 
             t_predicted_prob = model(t_data)
+            t_predicted_prob = F.softmax(t_predicted_prob, dim=1)
             test_prob.append(t_predicted_prob)
             test_true.extend(n_true_label)
 

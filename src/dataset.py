@@ -13,12 +13,19 @@ class MyDataset(Dataset):
         self.data_path = data_path
         self.num_classes = sum(1 for _ in open(class_path, 'r'))
         self.texts, self.labels = [], []
-        with open(data_path, 'r') as csv_file:
-            for line in csv.reader(csv_file):
-                label = int(line[0]) - 1
-                text = " ".join(line[1:]).lower()
+        with open(data_path, 'r') as infile:
+            for line in infile:
+                words = line.split()
+                label = int(words[0])
+                text = " ".join(words[1:]).lower()
                 self.labels.append(label)
                 self.texts.append(text)
+        # with open(data_path, 'r') as csv_file:
+        #     for line in csv.reader(csv_file):
+        #         label = int(line[0]) - 1
+        #         text = " ".join(line[1:]).lower()
+        #         self.labels.append(label)
+        #         self.texts.append(text)
         self.length = len(self.labels)
 
     def __len__(self):
