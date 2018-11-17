@@ -225,7 +225,7 @@ class NaiveBayes:
         correct = 0.0
         total = 0.0
 
-        with open("tweets2.txt") as tsv:
+        with open("tweets4.txt") as tsv:
             for tweet in csv.reader(tsv, dialect="excel-tab"):
                 self.tokenize_and_update_model(tweet[2], tweet[1])
                 content = tweet[2]
@@ -237,7 +237,7 @@ class NaiveBayes:
         return 100 * correct / total
 
 if __name__ == "__main__":
-    nb = NaiveBayes("tweets1.txt", tokenizer=tokenize_doc)
+    nb = NaiveBayes("tweets3.txt", tokenizer=tokenize_doc)
     nb.train_model()
     print(nb.evaluate_classifier_accuracy())
 
