@@ -1,0 +1,80 @@
+Model's parameters: {'alphabet': 'abcdefghijklmnopqrstuvwxyz0123456789,;.!?:\'"/\\|_@#$%^&*~`+-=<>()[]{}', 'word_length': 30, 'char_length': 10, 'optimizer': 'adam', 'batch_size': 64, 'num_epochs': 10, 'lr': 0.001, 'n_conv_filters': 50, 'n_fc_neurons': 256, 'input': 'data/SemEval/Balanced', 'output': 'output'}Epoch: 1/10 
+Training loss: 9.869588803686202 Training accuracy: 0.475 
+Test loss: 9.509479319800528 Test accuracy: 0.40834111422346714 
+Test confusion matrix: 
+[[600 317 154]
+ [345 545 181]
+ [464 440 167]]
+
+Epoch: 2/10 
+Training loss: 6.5877178476192055 Training accuracy: 0.575 
+Test loss: 9.073484106401311 Test accuracy: 0.45035792094615623 
+Test confusion matrix: 
+[[406 289 376]
+ [111 669 291]
+ [203 496 372]]
+
+Epoch: 3/10 
+Training loss: 2.3137819703668354 Training accuracy: 0.575 
+Test loss: 9.415439287359703 Test accuracy: 0.45222533457827574 
+Test confusion matrix: 
+[[421 155 495]
+ [ 99 507 465]
+ [202 344 525]]
+
+Epoch: 4/10 
+Training loss: 2.9219030398875474 Training accuracy: 0.7 
+Test loss: 10.9491008796965 Test accuracy: 0.4394646747587924 
+Test confusion matrix: 
+[[293 329 449]
+ [ 43 728 300]
+ [110 570 391]]
+
+Epoch: 5/10 
+Training loss: 1.2371849652379752 Training accuracy: 0.875 
+Test loss: 10.454267172214568 Test accuracy: 0.44382197323373795 
+Test confusion matrix: 
+[[335 292 444]
+ [ 71 670 330]
+ [127 523 421]]
+
+Epoch: 6/10 
+Training loss: 3.0426645118743183 Training accuracy: 0.75 
+Test loss: 11.96883902083024 Test accuracy: 0.4478680361033302 
+Test confusion matrix: 
+[[449  87 535]
+ [122 318 631]
+ [184 215 672]]
+
+Epoch: 7/10 
+Training loss: 1.2668659012269927 Training accuracy: 0.9 
+Test loss: 11.155191684127262 Test accuracy: 0.43261749144102085 
+Test confusion matrix: 
+[[330 280 461]
+ [ 71 611 389]
+ [131 491 449]]
+
+Epoch: 8/10 
+Training loss: 2.080036061629653 Training accuracy: 0.925 
+Test loss: 11.280130294317985 Test accuracy: 0.4447556800497977 
+Test confusion matrix: 
+[[398 216 457]
+ [ 98 529 444]
+ [152 417 502]]
+
+Epoch: 9/10 
+Training loss: 1.2404585658572613 Training accuracy: 0.875 
+Test loss: 11.401076377537873 Test accuracy: 0.44039838157485217 
+Test confusion matrix: 
+[[293 268 510]
+ [ 49 639 383]
+ [ 98 490 483]]
+
+Epoch: 10/10 
+Training loss: 0.49168244786560533 Training accuracy: 0.9 
+Test loss: 11.454734632954954 Test accuracy: 0.4382197323373794 
+Test confusion matrix: 
+[[297 281 493]
+ [ 51 655 365]
+ [101 514 456]]
+
