@@ -20,12 +20,6 @@ class MyDataset(Dataset):
                 text = " ".join(words[1:]).lower()
                 self.labels.append(label)
                 self.texts.append(text)
-        # with open(data_path, 'r') as csv_file:
-        #     for line in csv.reader(csv_file):
-        #         label = int(line[0]) - 1
-        #         text = " ".join(line[1:]).lower()
-        #         self.labels.append(label)
-        #         self.texts.append(text)
         self.length = len(self.labels)
 
     def __len__(self):

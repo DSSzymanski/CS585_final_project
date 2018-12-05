@@ -21,12 +21,12 @@ def get_args():
     parser.add_argument("-w", "--word_length", type=int, default=30)
     parser.add_argument("-r", "--char_length", type=int, default=10)
     parser.add_argument("-p", "--optimizer", type=str, choices=["sgd", "adam"], default="adam")
-    parser.add_argument("-b", "--batch_size", type=int, default=256)
+    parser.add_argument("-b", "--batch_size", type=int, default=64)
     parser.add_argument("-n", "--num_epochs", type=int, default=10)
     parser.add_argument("-l", "--lr", type=float, default=0.001)
     parser.add_argument("-c", "--n_conv_filters", type=int, default=50)
     parser.add_argument("-f", "--n_fc_neurons", type=int, default=256)
-    parser.add_argument("-i", "--input", type=str, default="data", help="path to input folder")
+    parser.add_argument("-i", "--input", type=str, default="data/SemEval/Balanced")
     parser.add_argument("-o", "--output", type=str, default="output", help="path to output folder")
     args = parser.parse_args()
 
@@ -41,10 +41,10 @@ def train(args):
     outfile.write("Model's parameters: {}".format(vars(args)))
 
     # Prepare the training and testing data
-    training_set = CharTensorDataset(os.path.join(args.input, "train.csv"),
+    training_set = CharTensorDataset(os.path.join(args.input, "train.txt"),
                                      os.path.join(args.input, "classes.txt"),
                                      args.alphabet, args.word_length, args.char_length)
-    test_set = CharTensorDataset(os.path.join(args.input, "test.csv"),
+    test_set = CharTensorDataset(os.path.join(args.input, "test.txt"),
                                  os.path.join(args.input, "classes.txt"),
                                  args.alphabet, args.word_length, args.char_length)
 
@@ -58,7 +58,7 @@ def train(args):
                               n_conv_filters=args.n_conv_filters, n_fc_neurons=args.n_fc_neurons)
     model = model.to(device)
 
-    criterion = nn.NLLLoss()
+    criterion = nn.CrossEntropyLoss()
     if args.optimizer == "adam":
         optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
     elif args.optimizer == "sgd":
