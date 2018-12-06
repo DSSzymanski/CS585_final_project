@@ -3,9 +3,9 @@ import csv
 import math
 from collections import defaultdict, Counter
 
-POS_LABEL = 0
-NEG_LABEL = 1
-NEUT_LABEL = 2
+POS_LABEL = '0'
+NEG_LABEL = '1'
+NEUT_LABEL = '2'
 
 def tokenize_doc(doc):
     """
@@ -57,8 +57,9 @@ class NaiveBayes:
         variable above.  It makes use of the tokenize_doc and update_model
         functions you will implement.
         """
-        with open("data/SemEval/train.txt") as tsv:
+        with open("data/SemEval/train2.txt") as tsv:
             for tweet in csv.reader(tsv, dialect="excel-tab"):
+                print(tweet)
                 self.tokenize_and_update_model(tweet[1], tweet[0])
         self.report_statistics_after_training()
 
@@ -225,7 +226,7 @@ class NaiveBayes:
         correct = 0.0
         total = 0.0
 
-        with open("data/SemEval/test.txt") as tsv:
+        with open("data/SemEval/test2.txt") as tsv:
             for tweet in csv.reader(tsv, dialect="excel-tab"):
                 self.tokenize_and_update_model(tweet[1], tweet[0])
                 content = tweet[1]
@@ -237,7 +238,7 @@ class NaiveBayes:
         return 100 * correct / total
 
 if __name__ == "__main__":
-    nb = NaiveBayes("data/SemEval/train.txt", tokenizer=tokenize_doc)
+    nb = NaiveBayes("data/SemEval/train2.txt", tokenizer=tokenize_doc)
     nb.train_model()
     print(nb.evaluate_classifier_accuracy())
 
@@ -247,9 +248,9 @@ if __name__ == "__main__":
     lines = [line.rstrip('\n') for line in open('trump_tweets.txt')]
     for line in lines:
         label = nb.classify(line)
-        if label == 1:
+        if label == '1':
             neg += 1
-        elif label == 0:
+        elif label == '0':
             pos += 1
         else:
             neut += 1
