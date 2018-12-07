@@ -64,11 +64,46 @@ def rating_vs_tweetclass(r,t,data):
     plt.plot(date_axis,rating)
     plt.show()
     
+def all_vs_rating(r,data):
+    """
+    r = rating type
+    0 = approval
+    1 = disapproval
+    2 = no opinion
+    """
+    rating_label = ""
+    if r == 0: rating_label = "Approve"
+    elif r == 1: rating_label = "Disapprove"
+    else: rating_label = "No Opinion"
+    
+    date_axis = []
+    tweets = []
+    rating = []
+    for entry in data:
+        date_axis.append(entry[0])
+        tweets.append(sum(entry[1]))
+        rating.append(int(entry[2][r]))
+    
+    #graph
+    plt.figure(num=1, figsize=(16,16))
+    #top
+    plt.subplot(211)
+    plt.xlabel("Time")
+    plt.ylabel("Num " + "all" + " tweets")
+    plt.xticks([])
+    plt.plot(date_axis,tweets)
+    #bottom
+    plt.subplot(212)
+    plt.xlabel("Time")
+    plt.ylabel("% " + rating_label)
+    plt.xticks([])
+    plt.plot(date_axis,rating)
+    plt.show()
+    
 def main():
     data = get_data()
     for x in range(3):
-        for y in range(3):
-            rating_vs_tweetclass(x,y,data)
+        all_vs_rating(x,data)
             
         
     
