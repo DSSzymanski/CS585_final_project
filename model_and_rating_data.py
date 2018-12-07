@@ -37,7 +37,7 @@ def load_old_tweets():
     return getList
 """
  
-def rating_date():
+def get_ratings():
     ratings = getRatingData()
     ret_ratings = []
     for rating in ratings:
@@ -111,11 +111,18 @@ def get_predictions(args):
     fh.writelines(date_class)
     fh.close()    
 
-    
+def get_class():
+    fh = open("data/date_class.txt", "r")    
+    getList = fh.readlines()
+    fh.close()
+    for x in range(len(getList)):
+        getList[x] = getList[x][:-1]
+    return getList
 
 def main():
     args = get_args()
     get_predictions(args) 
+    
     
 if __name__ == "__main__":
     main()
