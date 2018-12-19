@@ -8,15 +8,12 @@ class CharLevelConvNet(nn.Module):
     def __init__(self, input_length=285, n_classes=3, input_dim=68, n_conv_filters=256, n_fc_neurons=1024):
         super(CharLevelConvNet, self).__init__()
         self.conv1 = nn.Sequential(nn.Conv1d(input_dim, n_conv_filters, kernel_size=7),
-                                   nn.ReLU(), nn.MaxPool1d(3), nn.Dropout(0.5))
+                                   nn.ReLU(), nn.MaxPool1d(3))
         self.conv2 = nn.Sequential(nn.Conv1d(n_conv_filters, n_conv_filters, kernel_size=7),
                                    nn.ReLU(), nn.MaxPool1d(3))
-        self.conv3 = nn.Sequential(nn.Conv1d(n_conv_filters, n_conv_filters, kernel_size=3),
-                                   nn.BatchNorm1d(n_conv_filters), nn.ReLU())
-        self.conv4 = nn.Sequential(nn.Conv1d(n_conv_filters, n_conv_filters, kernel_size=3),
-                                   nn.ReLU(), nn.Dropout(0.5))
-        self.conv5 = nn.Sequential(nn.Conv1d(n_conv_filters, n_conv_filters, kernel_size=3),
-                                   nn.ReLU(), nn.Dropout(0.5))
+        self.conv3 = nn.Sequential(nn.Conv1d(n_conv_filters, n_conv_filters, kernel_size=3), nn.ReLU())
+        self.conv4 = nn.Sequential(nn.Conv1d(n_conv_filters, n_conv_filters, kernel_size=3), nn.ReLU())
+        self.conv5 = nn.Sequential(nn.Conv1d(n_conv_filters, n_conv_filters, kernel_size=3), nn.ReLU())
         self.conv6 = nn.Sequential(nn.Conv1d(n_conv_filters, n_conv_filters, kernel_size=3),
                                    nn.BatchNorm1d(n_conv_filters), nn.ReLU(), nn.MaxPool1d(3))
 

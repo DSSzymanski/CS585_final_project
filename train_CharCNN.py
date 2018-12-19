@@ -21,15 +21,14 @@ def get_args():
                         default="abcdefghijklmnopqrstuvwxyz0123456789,;.!?:'\"/\\|_@#$%^&*~`+-=<>()[]{}")
     parser.add_argument("-m", "--max_length", type=int, default=285)
     parser.add_argument("-p", "--optimizer", type=str, choices=["sgd", "adam"], default="adam")
-    parser.add_argument("-b", "--batch_size", type=int, default=128)
+    parser.add_argument("-b", "--batch_size", type=int, default=256)
     parser.add_argument("-n", "--num_epochs", type=int, default=10)
     parser.add_argument("-l", "--lr", type=float, default=0.001)
     parser.add_argument("-c", "--n_conv_filters", type=int, default=50)
     parser.add_argument("-f", "--n_fc_neurons", type=int, default=256)
-    parser.add_argument("-i", "--input", type=str, default="data/SemEval", help="path to input folder")
-    parser.add_argument("-o", "--output", type=str, default="output", help="path to output folder")
+    parser.add_argument("-i", "--input", type=str, default="data/SemEval/Balanced")
+    parser.add_argument("-o", "--output", type=str, default="output")
     args = parser.parse_args()
-
     return args
 
 
@@ -112,7 +111,7 @@ def train(args):
                                                                     test_metrics["loss"], test_metrics["acc"]))
         if test_metrics["acc"] > best_accuracy:
             best_accuracy = test_metrics["acc"]
-            torch.save(model, os.path.join(args.output, "char_level_trained_model"))
+            torch.save(model, os.path.join(args.output, "char_level_balanced_model"))
 
 
 def main():

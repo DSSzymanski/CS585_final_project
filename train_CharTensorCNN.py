@@ -27,9 +27,8 @@ def get_args():
     parser.add_argument("-c", "--n_conv_filters", type=int, default=50)
     parser.add_argument("-f", "--n_fc_neurons", type=int, default=256)
     parser.add_argument("-i", "--input", type=str, default="data/SemEval/Balanced")
-    parser.add_argument("-o", "--output", type=str, default="output", help="path to output folder")
+    parser.add_argument("-o", "--output", type=str, default="output")
     args = parser.parse_args()
-
     return args
 
 
@@ -115,7 +114,7 @@ def train(args):
                                                                     test_metrics["loss"], test_metrics["acc"]))
         if test_metrics["acc"] > best_accuracy:
             best_accuracy = test_metrics["acc"]
-            torch.save(model, os.path.join(args.output, "char_tensor_trained_model"))
+            torch.save(model, os.path.join(args.output, "char_tensor_balanced_model"))
 
 
 def main():
