@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.stats.stats import pearsonr
 from model_and_rating_data import get_class, get_ratings
 
 def get_data():
@@ -100,11 +101,55 @@ def all_vs_rating(r,data):
     plt.plot(date_axis,rating)
     plt.show()
     
+def get_correlations(data):
+    approval = []
+    disapproval = []
+    no_opinion = []
+    
+    positive = []
+    negative = []
+    neutral = []
+    
+    week_axis = []
+    count = 0
+    for entry in data:
+        week_axis.append(count)
+        approval.append(int(entry[2][0]))
+        disapproval.append(int(entry[2][1]))
+        no_opinion.append(int(entry[2][2]))
+        positive.append(entry[1][0])
+        negative.append(entry[1][1])
+        neutral.append(entry[1][2])
+        count += 1
+    
+    print("negative and approval\t" + str(pearsonr(negative, approval)[0]))
+    print("negative and disapproval\t" + str(pearsonr(negative, disapproval)[0]))
+    print("negative and no opinion\t" + str(pearsonr(negative, no_opinion)[0]))
+    print()
+    print("positive and approval\t" + str(pearsonr(positive, approval)[0]))
+    print("positive and disapproval\t" + str(pearsonr(positive, disapproval)[0]))
+    print("positive and no opinion\t" + str(pearsonr(positive, no_opinion)[0]))
+    print()
+    print("neutral and approval\t" + str(pearsonr(neutral, approval)[0]))
+    print("neutral and disapproval\t" + str(pearsonr(neutral, disapproval)[0]))
+    print("neutral and no opinion\t" + str(pearsonr(neutral, no_opinion)[0]))
+    
+        
 def main():
+    get_correlations(get_data())
+    
+    """
     data = get_data()
+    tweets = [0,0,0]
+    for x in range(len(data)):
+        tweets[0] += data[x][1][0]
+        tweets[1] += data[x][1][1]
+        tweets[2] += data[x][1][2]
+    print(tweets, sum(tweets))
+    
     for x in range(3):
         all_vs_rating(x,data)
-            
+    """        
         
     
 if __name__ == "__main__":
