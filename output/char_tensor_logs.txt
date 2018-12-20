@@ -1,80 +1,80 @@
 Model's parameters: {'alphabet': 'abcdefghijklmnopqrstuvwxyz0123456789,;.!?:\'"/\\|_@#$%^&*~`+-=<>()[]{}', 'word_length': 30, 'char_length': 10, 'optimizer': 'adam', 'batch_size': 64, 'num_epochs': 10, 'lr': 0.001, 'n_conv_filters': 50, 'n_fc_neurons': 256, 'input': 'data/SemEval/Balanced', 'output': 'output'}Epoch: 1/10 
-Training loss: 7.935743036307395 Training accuracy: 0.5 
-Test loss: 9.773959808337969 Test accuracy: 0.41238717709305944 
+Training loss: 20.881044378317892 Training accuracy: 0.325 
+Test loss: 18.56362876285054 Test accuracy: 0.3728602552131964 
 Test confusion matrix: 
-[[394 396 281]
- [167 682 222]
- [310 512 249]]
+[[904 167   0]
+ [777 294   0]
+ [800 271   0]]
 
 Epoch: 2/10 
-Training loss: 6.391327087860555 Training accuracy: 0.575 
-Test loss: 8.713628829941513 Test accuracy: 0.4531590413943355 
+Training loss: 11.925840397924185 Training accuracy: 0.525 
+Test loss: 11.02056380539843 Test accuracy: 0.4139433551198257 
 Test confusion matrix: 
-[[475 356 240]
- [145 730 196]
- [248 572 251]]
+[[782 101 188]
+ [466 301 304]
+ [576 248 247]]
 
 Epoch: 3/10 
-Training loss: 2.1764588546007873 Training accuracy: 0.75 
-Test loss: 9.646004865967477 Test accuracy: 0.4565826330532213 
+Training loss: 3.871741883456707 Training accuracy: 0.7 
+Test loss: 9.709785898982206 Test accuracy: 0.4428882664176782 
 Test confusion matrix: 
-[[470 155 446]
- [108 480 483]
- [230 324 517]]
+[[425 145 501]
+ [110 461 500]
+ [216 318 537]]
 
 Epoch: 4/10 
-Training loss: 0.3630868444219232 Training accuracy: 0.875 
-Test loss: 9.968169070355668 Test accuracy: 0.46187363834422657 
+Training loss: 3.1128899201750757 Training accuracy: 0.725 
+Test loss: 10.10643535437848 Test accuracy: 0.43448490507314036 
 Test confusion matrix: 
-[[408 181 482]
- [ 79 537 455]
- [161 371 539]]
+[[282 317 472]
+ [ 43 695 333]
+ [ 88 564 419]]
 
 Epoch: 5/10 
-Training loss: 3.9166086304932834 Training accuracy: 0.7 
-Test loss: 10.924817498279994 Test accuracy: 0.45440398381574854 
+Training loss: 1.429301131144166 Training accuracy: 0.7 
+Test loss: 10.767994641084696 Test accuracy: 0.4428882664176782 
 Test confusion matrix: 
-[[311 200 560]
- [ 40 583 448]
- [ 97 408 566]]
+[[336 234 501]
+ [ 65 589 417]
+ [123 450 498]]
 
 Epoch: 6/10 
-Training loss: 1.2501848170533776 Training accuracy: 0.85 
-Test loss: 10.820703617598278 Test accuracy: 0.45689386865857456 
+Training loss: 2.038334226142615 Training accuracy: 0.8 
+Test loss: 11.528921641453891 Test accuracy: 0.4447556800497977 
 Test confusion matrix: 
-[[385 177 509]
- [ 75 507 489]
- [146 349 576]]
+[[338 233 500]
+ [ 82 580 409]
+ [127 433 511]]
 
 Epoch: 7/10 
-Training loss: 0.3839307748712599 Training accuracy: 0.85 
-Test loss: 11.40694805148812 Test accuracy: 0.4494242141300965 
+Training loss: 1.1388595912023447 Training accuracy: 0.85 
+Test loss: 11.10430103984009 Test accuracy: 0.4372860255213196 
 Test confusion matrix: 
-[[292 254 525]
- [ 40 639 392]
- [ 98 460 513]]
+[[292 320 459]
+ [ 48 683 340]
+ [102 539 430]]
 
 Epoch: 8/10 
-Training loss: 0.3463640358299017 Training accuracy: 0.975 
-Test loss: 11.21500801221787 Test accuracy: 0.45813881107998755 
+Training loss: 1.1646404342725873 Training accuracy: 0.875 
+Test loss: 11.087136078406166 Test accuracy: 0.4422657952069717 
 Test confusion matrix: 
-[[335 246 490]
- [ 54 607 410]
- [111 430 530]]
+[[330 278 463]
+ [ 67 648 356]
+ [120 508 443]]
 
 Epoch: 9/10 
-Training loss: 0.3044237742200494 Training accuracy: 0.95 
-Test loss: 11.584522120903573 Test accuracy: 0.4596949891067538 
+Training loss: 1.1444249021820725 Training accuracy: 0.925 
+Test loss: 12.426381536344065 Test accuracy: 0.4400871459694989 
 Test confusion matrix: 
-[[288 253 530]
- [ 42 626 403]
- [ 79 429 563]]
+[[359 185 527]
+ [ 82 521 468]
+ [139 398 534]]
 
 Epoch: 10/10 
-Training loss: 0.38646403383463623 Training accuracy: 0.925 
-Test loss: 11.717531956583167 Test accuracy: 0.4603174603174603 
+Training loss: 1.1481701334938408 Training accuracy: 0.875 
+Test loss: 11.916042246539853 Test accuracy: 0.44351073762838467 
 Test confusion matrix: 
-[[308 255 508]
- [ 54 629 388]
- [103 426 542]]
+[[390 200 481]
+ [ 89 538 444]
+ [154 420 497]]
 
